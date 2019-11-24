@@ -23,7 +23,7 @@ module.exports = function(app){
     app.post("/api/notes", function(req, res){
         let newNote = req.body;
 
-        let db = noteData();
+        let db = readNote();
 
         db.push(newNote);
 

@@ -8,8 +8,8 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-require("/routes/htmlRoutes")(app);
-require("/routes/noteRoutes")(app);
+require("./routes/htmlRoutes")(app);
+require("./routes/noteRoutes")(app);
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function()
 {
