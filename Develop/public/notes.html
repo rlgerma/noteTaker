@@ -18,7 +18,7 @@
     </a>
     <div class="icons">
       <i class="fas fa-save text-light save-note"></i>
-      <i class="fas fa-pen text-light new-note"></i>
+      <i class="fas fa-pen text-light new-note" id="btn"></i>
     </div>
   </nav>
   <div class="container-fluid">
@@ -37,6 +37,32 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/Develop/public/assets/js/index.js"></script>
+
+  <!-- just saw that index.js file after I wrote this.... -->
+<!-- <script>
+   var express = require('express')
+   var fs = require('fs')  
+   var app = express();
+   var data = fs.readFileSync('../db/journal.json');
+   var notes = JSON.parse(data);
+
+   const addNote = (ev) => {
+    ev.preventDefault()
+    let note = {
+      title: document.getElementById('note-title').value,
+      body: document.getElementById('note-textarea').value
+    }
+    notes.push(note);
+    fs.writeFile('notes.json', data);
+
+    document.querySelector('form').reset();
+
+   }
+
+   document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('btn').addEventListener('click', addNote);
+   });
+</script> -->
 </body>
 
 </html>

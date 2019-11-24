@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 require("./Develop/routes/htmlRoutes")(app);
+require("./Develop/routes/noteRoutes")(app);
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function()
 {
