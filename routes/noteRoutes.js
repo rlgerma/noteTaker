@@ -4,7 +4,7 @@ var fs = require('fs');
 
 const readNote = () => {
 
-  const db = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json')))
+  let db = JSON.parse(fs.readFileSync(path.join(__dirname, '../db/db.json')))
   return db;
 }
 
@@ -33,7 +33,7 @@ module.exports = function(app){
     });
 
     app.delete("/api/notes/:id", function(req, res){
-        const db = noteData();
+        const db = readNote();
         
         const deleteId = req.params.id;
         for (let i=0; i<db.length; i+=1 ){
