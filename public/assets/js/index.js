@@ -30,7 +30,7 @@ var saveNote = function(note) {
 // A function for deleting a note from the db
 var deleteNote = function(id) {
   return $.ajax({
-    url: "api/notes/" + id,
+    url: "api/notes" + id,
     method: "DELETE"
   });
 };
@@ -120,7 +120,7 @@ var handleRenderSaveBtn = function() {
 };
 
 // Render's the list of note titles
-var renderNoteList = function(notes) {
+var renderNoteList =  function(notes) {
   $noteList.empty();
 
   var noteListItems = [];
@@ -134,8 +134,10 @@ var renderNoteList = function(notes) {
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
     );
 
-    $li.append($span, $delBtn);
-    noteListItems.push($li);
+    if($li != null ){
+      $li.append($span, $delBtn);
+      noteListItems.push($li);
+    }
   }
 
   $noteList.append(noteListItems);
