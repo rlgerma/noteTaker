@@ -3,8 +3,6 @@ var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
 var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
-var counter = 0;
-
 
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
@@ -15,7 +13,6 @@ var getNotes = function() {
     url: "/api/notes",
     method: "GET"
   });
-  
 };
 
 // A function for saving a note to the db
@@ -30,7 +27,7 @@ var saveNote = function(note) {
 // A function for deleting a note from the db
 var deleteNote = function(id) {
   return $.ajax({
-    url: "api/notes" + id,
+    url: "api/notes/" + id,
     method: "DELETE"
   });
 };
@@ -52,30 +49,17 @@ var renderActiveNote = function() {
   }
 };
 
-
-
 // Get the note data from the inputs, save it to the db and update the view
-var handleNoteSave = function() {
-
-  function counterIncrement(){
-    counter += 1;
-    return counter;
-  }
-
-  console.log("This is your counter " + counter);
-
+var handleNoteSave = function () {
   var newNote = {
-    id: counterIncrement(),
     title: $noteTitle.val(),
-    text: $noteText.val(),
+    text: $noteText.val()
   };
 
-
-  saveNote(newNote).then(function(data) {
+  saveNote(newNote).then(function (data) {
     getAndRenderNotes();
     renderActiveNote();
   });
-
 };
 
 // Delete the clicked note
@@ -91,7 +75,7 @@ var handleNoteDelete = function(event) {
     activeNote = {};
   }
 
-  deleteNote(note.id).then(function() {
+  deleteNote(note.id).then(function () {
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -120,7 +104,7 @@ var handleRenderSaveBtn = function() {
 };
 
 // Render's the list of note titles
-var renderNoteList =  function(notes) {
+var renderNoteList = function(notes) {
   $noteList.empty();
 
   var noteListItems = [];
@@ -128,16 +112,14 @@ var renderNoteList =  function(notes) {
   for (var i = 0; i < notes.length; i++) {
     var note = notes[i];
 
-    var $li = $("<li class='list-group-item'>").data(notes);
+    var $li = $("<li class='list-group-item'>").data(note);
     var $span = $("<span>").text(note.title);
     var $delBtn = $(
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
     );
 
-    if($li != null ){
-      $li.append($span, $delBtn);
-      noteListItems.push($li);
-    }
+    $li.append($span, $delBtn);
+    noteListItems.push($li);
   }
 
   $noteList.append(noteListItems);
@@ -145,7 +127,7 @@ var renderNoteList =  function(notes) {
 
 // Gets notes from the db and renders them to the sidebar
 var getAndRenderNotes = function() {
-  return getNotes().then(function(data) {
+  return getNotes().then(function (data) {
     renderNoteList(data);
   });
 };
