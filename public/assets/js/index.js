@@ -10,7 +10,7 @@ var activeNote = {};
 // A function for getting all notes from the db
 var getNotes = function() {
   return $.ajax({
-    url: "/api/notes",
+    url: "api/notes",
     method: "GET"
   });
 };
@@ -18,9 +18,10 @@ var getNotes = function() {
 // A function for saving a note to the db
 var saveNote = function(note) {
   return $.ajax({
-    url: "/api/notes",
+    url: "api/notes",
     data: note,
-    method: "POST"
+    method: "POST",
+    
   });
 };
 
@@ -116,10 +117,9 @@ var renderNoteList = function(notes) {
     var $span = $("<span>").text(note.title);
     var $delBtn = $(
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
-    );
-
-    $li.append($span, $delBtn);
-    noteListItems.push($li);
+    )
+    // $li.append($span, $delBtn);
+    // noteListItems.push($li);
   }
 
   $noteList.append(noteListItems);

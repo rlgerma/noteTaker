@@ -1,14 +1,12 @@
 var fs = require("fs")
-var notesData = getNotes();
 
 const getNotes = () => {
-  const data = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+  const note = JSON.parse(fs.readFileSync('db/db.json', 'utf8'));
   
-  for (let i = 0; i < notes.length; i++) {
-    notes[i].id = '' + i;
+  for (let i = 0; i < note.length; i++) {
+    note[i].id = '' + i;
   }
-  
-  return notes;
+  return note;
 }
 
 module.exports = function (app) {
@@ -20,6 +18,7 @@ module.exports = function (app) {
     });
 
     app.post("/api/notes", function (req, res) {
+        notesData = getNotes();
         notesData.push(req.body);
         fs.writeFileSync('./db/db.json', JSON.stringify(notesData), 'utf8');
         res.json(true);
@@ -27,11 +26,11 @@ module.exports = function (app) {
     });
 
     app.delete("/api/notes/:id", function (req, res) {
-        const requestID = req.params.id;
-        console.log(requestID);
+        const noteID = req.params.id;
+        console.log(noteID);
 
         let note = notesData.filter(note => {
-            return note.id === requestID;
+            return note.id === noteID;
         })[0];
 
         console.log(note);
