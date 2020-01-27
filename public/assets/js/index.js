@@ -1,4 +1,3 @@
-// I updated some of the code to ES6 syntax for the sake of practice
 const $noteTitle = $(".note-title");
 const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
@@ -56,7 +55,6 @@ var renderActiveNote = function () {
 };
 
 
-//Fancy stuff I copied off the internet to generate a random ID# for each note
 const length = 8;
 const timestamp = +new Date;
 
@@ -111,12 +109,6 @@ var handleNoteDelete = function (event) {
       let el = document.getElementById(note.id)
       el.remove();
     });
-
-  // I achieved the delete functionality by comenting out the code that Trilogy provided below.  Hmmmm....
-  // .then( () => {
-  //   getAndRenderNotes();
-  //   renderActiveNote()
-  // });
 };
 
 // Sets the activeNote and displays it
